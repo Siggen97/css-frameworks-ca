@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+  <title>Authentication</title>
+</head>
+<body class="bg-light">
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-primary p-4">
+          <a href="feed.html"><h5 class="text-white h4">Blog Posts</h5></a>
+          <a href="profile.html"><h5 class="text-white h4">About</h5></a>
+          <a href="authentication.html"><h5 class="text-white h4">Log in</h5></a>
+        </div>
+      </div>
+      <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+  <div class="container d-flex align-items-center min-vh-100">
+    <div class="row w-100">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Login or Register</h2>
+            <form action="/profile" method="post">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required minlength="8">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

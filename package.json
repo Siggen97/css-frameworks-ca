@@ -4,7 +4,7 @@
   "description": "A starting point for the CSS Frameworks CA project",
   "scripts": {
     "start": "live-server",
-    "sass": "sass --watch scss:css"
+    "sass": "sass --watch src/scss:css"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "homepage": "https://github.com/NoroffFEU/css-frameworks-ca#readme",
   "dependencies": {
     "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.1",
     "live-server": "^1.2.2",
     "sass": "^1.69.5"
   }
