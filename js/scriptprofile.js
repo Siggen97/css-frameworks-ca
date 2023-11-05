@@ -18,10 +18,10 @@ async function fetchData() {
 }
 
 function displayData(data, containerClass) {
-    const container = document.querySelector(`.running-data`); // This selects the first element with the given class name
+    const container = document.querySelector(`.running-data`); 
     if (container) {
         container.innerHTML = '';
-        const reversedData = [...data].reverse(); // Create a shallow copy and reverse it
+        const reversedData = [...data].reverse(); 
 
         reversedData.forEach((run) => {
             displayRun(run, container);
