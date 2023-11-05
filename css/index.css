@@ -4,3 +4,15 @@
 body {
     caret-color: transparent;
 }
+.running-data {
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+}
+.run {
+    display: block;
+    width: 14rem;
+    padding: 8px;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
