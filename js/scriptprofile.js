@@ -64,6 +64,7 @@ calories.textContent = run.calories;
 
 let description = document.createElement("p");
 description.textContent = run.description;
+description.className = "description";
 
 
     runDiv.appendChild(title);

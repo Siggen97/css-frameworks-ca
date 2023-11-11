@@ -1,15 +1,28 @@
+$primarycolor: white;
+$secondcolor: #191654;
+$thirdcolor: #43c6ac;
+$primarytextcolor: black;
+$secondtextcolor: white;
+
 body {
-    caret-color: transparent;
+  caret-color: transparent;
+  background-color: $primarycolor;
 }
 .running-data {
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 5rem;
-}
-.run {
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+  .run {
     display: block;
-    width: 14rem;
-    padding: 8px;
-    background-color: aliceblue;
+    width: 15rem;
+    padding: 1rem;
+    background-color: $secondcolor;
+    border: $thirdcolor 5px solid;
+    color: $secondtextcolor;
     border-radius: 5px;
+    h5,
+    .description {
+      color: $thirdcolor;
+    }
+  }
 }

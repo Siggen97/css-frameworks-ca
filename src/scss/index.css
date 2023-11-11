@@ -1,5 +1,6 @@
 body {
   caret-color: transparent;
+  background-color: white;
 }
 
 .running-data {
@@ -7,11 +8,16 @@ body {
   flex-wrap: wrap;
   margin-bottom: 5rem;
 }
-
-.run {
+.running-data .run {
   display: block;
-  width: 14rem;
-  padding: 8px;
-  background-color: aliceblue;
+  width: 15rem;
+  padding: 1rem;
+  background-color: #191654;
+  border: #43c6ac 5px solid;
+  color: white;
   border-radius: 5px;
+}
+.running-data .run h5,
+.running-data .run .description {
+  color: #43c6ac;
 }/*# sourceMappingURL=index.css.map */
