@@ -1,8 +1,8 @@
 $primarycolor: white;
 $secondcolor: #191654;
-$thirdcolor: #43c6ac;
 $primarytextcolor: black;
 $secondtextcolor: white;
+
 
 body {
   caret-color: transparent;
@@ -16,13 +16,13 @@ body {
     display: block;
     width: 15rem;
     padding: 1rem;
-    background-color: $secondcolor;
-    border: $thirdcolor 5px solid;
-    color: $secondtextcolor;
+    
+    border: $secondcolor 5px solid;
+    color: $primarytextcolor;
     border-radius: 5px;
     h5,
     .description {
-      color: $thirdcolor;
+      color: $secondcolor;
     }
   }
 }

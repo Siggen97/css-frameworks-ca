@@ -12,12 +12,11 @@ body {
   display: block;
   width: 15rem;
   padding: 1rem;
-  background-color: #191654;
-  border: #43c6ac 5px solid;
-  color: white;
+  border: #191654 5px solid;
+  color: black;
   border-radius: 5px;
 }
 .running-data .run h5,
 .running-data .run .description {
-  color: #43c6ac;
+  color: #191654;
 }/*# sourceMappingURL=index.css.map */
