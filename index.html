@@ -5,51 +5,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/scss/index.css">
-  <title>Authentication</title>
+  <script src="./js/login.mjs" type="module"></script>
+  <script src="./js/registerUser.mjs"></script>
+  <script src="./js/variables.mjs" type="module"></script>
+  <title>SLXEED HOME</title>
 </head>
 <body class="bg-light">
   <header>
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-primary p-4">
-        <a href="./feed/index.html"><h5 class="text-white h4">Feed</h5></a>
-        <a href="./profile/index.html"><h5 class="text-white h4">Profile</h5></a>
-        <a href="index.html"><h5 class="text-white h4">Log in</h5></a>
-      </div>
-      </div>
-      <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <nav class="navbar fixed-top navbar-expand-lg bg-white">
+      <div class="container-fluid me-2">
+        <a class="navbar-brand fs-1 ms-3" href="index.html">SLXEED</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link ms-3 active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item d-none" id="profileLink">
+              <a class="nav-link ms-3" href="/profile/">Profile</a>
+            </li>
+            <li class="nav-item d-none" id="feedLink">
+              <a class="nav-link ms-3" href="/feed/">Feed</a>
+            </li>
+          </ul>
+          <form class="d-flex" id="loginForm">
+            <input type="email" class="form-control me-2" id="inputEmailLogin" placeholder="Email" required pattern="[\w\-.]+@(stud.)?noroff.no$" title="Only @(stud.)noroff.no domains are allowed to log in" />
+            <input type="password" class="form-control me-2" id="inputPasswordLogin" placeholder="Password" minlength="8" required title="Password must be at least 8 characters long" />
+            <button type="submit" class="btn btn-primary me-2">Log in</button>
+          </form>
+          <button class="btn btn-outline-danger d-none" id="signOutButton">Sign Out</button>
         </div>
-      </nav>
+      </div>
+    </nav>
   </header>
-  <div class="container d-flex align-items-center min-vh-100">
-    <div class="row w-100">
-      <div class="col-md-6 mx-auto">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title text-center mb-4">Login or Register</h2>
-            <form action="/profile" method="post">
-              <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required minlength="8">
-              </div> 
 
-                <button type="submit" class="btn btn-primary w-100"> <a href="./profile/index.html">
-                  Submit
-                </a>
-                </button>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div class="container">
     </div>
-  </div>
+    <h3>Welcome to so</h3>
+    
+    
+
+  <footer class="py-3 my-4 mt-5">
+    <hr>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="index.html" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+    </ul>
+    <p class="text-center text-muted">SLXEED</p>
+    <p class="text-center text-muted">© 2024 Sigrid Lydvo</p>
+  </footer>
   <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module">
+    import { checkLoginStatus, logoutUser } from "./js/login.mjs";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const isLoggedIn = checkLoginStatus();
+
+      const loginForm = document.getElementById("loginForm");
+      const signOutButton = document.getElementById("signOutButton");
+      const profileLink = document.getElementById("profileLink");
+      const feedLink = document.getElementById("feedLink");
+
+      if (isLoggedIn) {
+        loginForm.classList.add("d-none");
+        signOutButton.classList.remove("d-none");
+        profileLink.classList.remove("d-none");
+        feedLink.classList.remove("d-none");
+      } else {
+        loginForm.classList.remove("d-none");
+        signOutButton.classList.add("d-none");
+        profileLink.classList.add("d-none");
+        feedLink.classList.add("d-none");
+      }
+
+      signOutButton.addEventListener("click", logoutUser);
+    });
+  </script>
 </body>
 </html>

@@ -8,21 +8,6 @@ body {
   caret-color: transparent;
   background-color: $primarycolor;
 }
-.running-data {
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 5rem;
-  .run {
-    display: block;
-    width: 15rem;
-    padding: 1rem;
-    
-    border: $secondcolor 5px solid;
-    color: $primarytextcolor;
-    border-radius: 5px;
-    h5,
-    .description {
-      color: $secondcolor;
-    }
-  }
+#userAvatar {
+  width: 100px;
 }

@@ -3,20 +3,7 @@ body {
   background-color: white;
 }
 
-.running-data {
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 5rem;
+#userAvatar {
+  width: 200px;
+  height: 200px;
 }
-.running-data .run {
-  display: block;
-  width: 15rem;
-  padding: 1rem;
-  border: #191654 5px solid;
-  color: black;
-  border-radius: 5px;
-}
-.running-data .run h5,
-.running-data .run .description {
-  color: #191654;
-}/*# sourceMappingURL=index.css.map */
