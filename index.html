@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="src/scss/index.css">
+  <link rel="stylesheet" href="dist/css/index.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <script src="./js/login.mjs" type="module"></script>
   <script src="./js/registerUser.mjs"></script>
   <script src="./js/variables.mjs" type="module"></script>
@@ -41,20 +42,41 @@
           <form class="d-flex" id="loginForm">
             <input type="email" class="form-control me-2" id="inputEmailLogin" placeholder="Email" required pattern="[\w\-.]+@(stud.)?noroff.no$" title="Only @(stud.)noroff.no domains are allowed to log in" />
             <input type="password" class="form-control me-2" id="inputPasswordLogin" placeholder="Password" minlength="8" required title="Password must be at least 8 characters long" />
-            <button type="submit" class="btn btn-primary me-2">Log in</button>
+            <button type="submit" class="btn btn-primary me-2 w-100">Log in</button>
           </form>
           <button class="btn btn-outline-danger d-none" id="signOutButton">Sign Out</button>
         </div>
       </div>
     </nav>
   </header>
-
-    <div class="container">
+  <main class="container">
+    <div id="homePageContainer" class="homePageContainer">
+     <h3>Welcome to SLXEED</h3>
+      <p>Share your posts with friends and followers!</p>
     </div>
-    <h3>Welcome to so</h3>
-    
-    
-
+    <div id="registerContainer" class="mt-4">
+      <h2>Register</h2>
+      <form id="registerForm">
+        <div class="mb-3">
+          <label for="inputName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="inputName" required pattern="^[a-zA-Z0-9_]+$" title="Name must not contain punctuation symbols apart from underscore (_)">
+        </div>
+        <div class="mb-3">
+          <label for="inputEmailRegister" class="form-label">Email</label>
+          <input type="email" class="form-control" id="inputEmailRegister" required pattern="[\w\-.]+@(stud.)?noroff.no$" title="Only @(stud.)noroff.no domains are allowed to register">
+        </div>
+        <div class="mb-3">
+          <label for="inputPasswordRegister" class="form-label">Password</label>
+          <input type="password" class="form-control" id="inputPasswordRegister" minlength="8" required title="Password must be at least 8 characters long">
+        </div>
+        <div class="mb-3">
+          <label for="inputAvatar" class="form-label">Avatar URL (Optional)</label>
+          <input type="url" class="form-control" id="inputAvatar">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </div>
+  </main>
   <footer class="py-3 my-4 mt-5">
     <hr>
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -73,20 +95,26 @@
       const isLoggedIn = checkLoginStatus();
 
       const loginForm = document.getElementById("loginForm");
+      const registerContainer = document.getElementById("registerContainer");
       const signOutButton = document.getElementById("signOutButton");
       const profileLink = document.getElementById("profileLink");
       const feedLink = document.getElementById("feedLink");
+      const homePageContainer = document.getElementById("homePageContainer");
 
       if (isLoggedIn) {
         loginForm.classList.add("d-none");
+        registerContainer.classList.add("d-none");
         signOutButton.classList.remove("d-none");
         profileLink.classList.remove("d-none");
         feedLink.classList.remove("d-none");
+        homePageContainer.classList.remove("d-none")
       } else {
         loginForm.classList.remove("d-none");
+        registerContainer.classList.remove("d-none");
         signOutButton.classList.add("d-none");
         profileLink.classList.add("d-none");
         feedLink.classList.add("d-none");
+        homePageContainer.classList.add("d-none")
       }
 
       signOutButton.addEventListener("click", logoutUser);

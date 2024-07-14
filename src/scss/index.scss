@@ -1,3 +1,5 @@
+@import "../../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
+
 $primarycolor: white;
 $secondcolor: #191654;
 $primarytextcolor: black;
@@ -9,5 +11,17 @@ body {
   background-color: $primarycolor;
 }
 #userAvatar {
-  width: 100px;
+  width: 200px;
+  height: 200px;
+}
+#loginForm {
+  display: flex;
+  width: fit-content;
+  btn {
+    width: 100%;
+  }
+}
+.homePageContainer {
+  margin-top: 10rem;
+
 }

@@ -17,35 +17,31 @@ import { apiBaseUrl, registerUrl } from "./variables.mjs";
 
 const registerUser = async (url, data) => {
   try {
-    // CREATE OBJECT FOR FETCH REQUEST
     const postData = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // USER-DATA TO JSON STRING
       body: JSON.stringify(data),
     };
-    // SEND FETCH-REQUEST TO AN URL
     const response = await fetch(url, postData);
-    // PARSE RESPONSE AS JSON
     const json = await response.json();
 
-    alert("You are now registered, please log in with your email and password!");
-    // REDIRECT TO LOGIN
-    window.location.href = "#";
-
-    // RETURN JSON DATA
-    return json;
+    if (response.ok) {
+      alert("You are now registered, please log in with your email and password!");
+      window.location.reload();
+      return json;
+    } else {
+      alert(json.message || "Registration failed. Please try again.");
+    }
   } catch (error) {
-    // THROW ERROR
-    throw new Error(error, "Error happened");
+    console.error("Error occurred:", error);
+    alert("An error occurred. Please try again.");
   }
 };
 
 
-// REGISTER-FORM
-const registerForm = document.querySelector("#registerForm");
+
 
 /**
  * Function to handle the form submission event and register a new user.
@@ -53,29 +49,29 @@ const registerForm = document.querySelector("#registerForm");
  * @example
  * registerForm.addEventListener("submit", register);
  */
-const register = (event) => {
-  // PREVENT DEFAULT FORM BEHAVIOR
-  event.preventDefault();
-  // DESTRUCTURE FORM ELEMENTS
-  const [name, email, password, avatar] = event.target.elements;
 
-  // CREATE USER OBJECT WITH VALUES
-  const user = {
-    name: name.value,
-    email: email.value,
-    password: password.value,
-    avatar: avatar.value,
-  };
+// REGISTER-FORM
+const registerForm = document.querySelector("#registerForm");
 
-  // CALL FUNCTION TO SEND USER-DATA
-  registerUser(`${apiBaseUrl}${registerUrl}`, user);
+if (registerForm) {
+  registerForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const [name, email, password, avatar] = event.target.elements;
 
-  // CLEAR FORM FIELDS
-  name.value = "";
-  email.value = "";
-  password.value = "";
-  avatar.value = "";
-};
+    const user = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      avatar: avatar.value,
+    };
 
-// EVENT LISTENER FOR FORM SUBMISSION
-registerForm.addEventListener("submit", register);
+    registerUser(`${apiBaseUrl}${registerUrl}`, user);
+
+    name.value = "";
+    email.value = "";
+    password.value = "";
+    avatar.value = "";
+  });
+}
+
+export { registerUser };
