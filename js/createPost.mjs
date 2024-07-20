@@ -3,9 +3,7 @@ import { displayAllPostsCards } from "./fetchAllPosts.mjs";
 
 // AFTER DOM CONTENT LOADED
 document.addEventListener("DOMContentLoaded", () => {
-// GET ELEMENTS FROM FORM
-  const createPostForm = document.querySelector("#newPost");
-  // SUBMIT EVENT LISTENER
+  const createPostForm = document.querySelector("#newPostForm");
   createPostForm.addEventListener("submit", createPost);
 });
 
@@ -14,27 +12,20 @@ document.addEventListener("DOMContentLoaded", () => {
  * @param {Event} event - The form submission event.
  * @returns {Promise<void>} - A promise that resolves when the post creation is complete.
  */
-
 const createPost = async (event) => {
-  // PREVENT DEFAULT FORM SUBMISSION
   event.preventDefault();
 
-  // GET USER-TOKEN
   const userToken = localStorage.getItem("accessToken");
 
-  // GET VALUES FROM FORM
-  const title = event.target.querySelector("#exampleInputTitle1").value;
-  const content = event.target.querySelector("#exampleInputTextArea1").value;
-  const imageUrl = event.target.querySelector("#exampleInputImageUrl").value;
+  const title = event.target.querySelector("#postTitle").value;
+  const content = event.target.querySelector("#postContent").value;
+  const imageUrl = event.target.querySelector("#postImage").value;
 
-  // CHECK REQUIRED FIELDS
   if (!title || !content) {
-    // ALERT FOR REQUIRED FIELDS
     alert("Please fill in all required fields");
     return;
   }
 
-  // NEW POST OBJECT
   const newPost = {
     title: title,
     body: content,
@@ -42,7 +33,6 @@ const createPost = async (event) => {
   };
 
   try {
-    // POST REQUEST TO CREATE NEW POST
     const response = await fetch(`${apiBaseUrl}${allPostsApi}`, {
       method: "POST",
       headers: {
@@ -53,16 +43,12 @@ const createPost = async (event) => {
     });
 
     if (!response.ok) {
-      // THROW ERROR IF RESPONSE NOT OK
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    // RESET FORM
     event.target.reset();
-
-    // RELOAD ALL POSTS
-    await displayAllPostsCards();
+    displayAllPostsCards(true); // Pass a parameter to indicate a refresh
   } catch (error) {
-    // THROW ERROR
-    throw new Error("Error creating post:", error);
+    console.error("Error creating post:", error);
+    alert("An error occurred while creating the post. Please try again.");
   }
 };

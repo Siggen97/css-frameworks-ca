@@ -32,7 +32,7 @@ const createCardAllPosts = (postData) => {
   const cardPostImage = document.createElement("img");
   // Set the source (src) attribute of the image. Use the postData.media if it's truthy,
   // if not, use the fallback image "../images/no_img.jpg"
-  cardPostImage.src = !!postData.media ? postData.media : "../images/no_img.jpg";
+  cardPostImage.src = postData.avatar || "../images/no_avatar.jpg";
   cardPostImage.className = "card-img-top feed-card-img";
   cardPostImage.id = "cardPostImage";
   cardPostContent.appendChild(cardPostImage);
@@ -46,6 +46,10 @@ const createCardAllPosts = (postData) => {
   cardPostTitle.className = "card-title mb-2";
   cardPostTitle.id = "cardPostTitle";
   cardPostTextContent.appendChild(cardPostTitle);
+
+  const cardPostBody = document.createElement("p");
+    cardPostBody.innerText = postData.body;
+    cardPostTextContent.appendChild(cardPostBody);
 
   const userNameOnCardLayout = document.createElement("div");
   userNameOnCardLayout.className = "d-flex flex-row align-items-center mb-1";
