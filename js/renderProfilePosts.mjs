@@ -29,13 +29,12 @@ const createCardAllPosts = (postData) => {
   cardPostContent.className = "card h-100 my-3";
   cardColLayout.appendChild(cardPostContent);
 
-  const cardPostImage = document.createElement("img");
-  // Set the source (src) attribute of the image. Use the postData.media if it's truthy,
-  // if not, use the fallback image "../images/no_img.jpg"
-  cardPostImage.src = postData.avatar || "../images/no_avatar.jpg";
-  cardPostImage.className = "card-img-top feed-card-img";
-  cardPostImage.id = "cardPostImage";
-  cardPostContent.appendChild(cardPostImage);
+  if (postData.media) {
+    const cardPostImage = document.createElement("img");
+    cardPostImage.src = postData.media || "../images/no_img.jpg";
+    cardPostImage.className = "card-img-top feed-card-img";
+    cardPostContent.appendChild(cardPostImage);
+  }
 
   const cardPostTextContent = document.createElement("div");
   cardPostTextContent.className = "card-body px-3 pt-3 pb-0";
@@ -48,22 +47,20 @@ const createCardAllPosts = (postData) => {
   cardPostTextContent.appendChild(cardPostTitle);
 
   const cardPostBody = document.createElement("p");
-    cardPostBody.innerText = postData.body;
-    cardPostTextContent.appendChild(cardPostBody);
+  cardPostBody.innerText = postData.body;
+  cardPostTextContent.appendChild(cardPostBody);
 
   const userNameOnCardLayout = document.createElement("div");
   userNameOnCardLayout.className = "d-flex flex-row align-items-center mb-1";
   cardPostTextContent.appendChild(userNameOnCardLayout);
 
   const profileImageThumbnail = document.createElement("img");
-  // Set the source (src) attribute of the image. Use the postData.author.avatar if it's truthy,
-  // if not, use the fallback image "../images/no_avatar.jpg"
-  profileImageThumbnail.src = !!postData.avatar ? postData.avatar : "../images/no_avatar.jpg";
+  profileImageThumbnail.src = user.avatar || "../images/no_avatar.jpg";
   profileImageThumbnail.className = "rounded-circle me-1 profile-img-thumbnail";
   userNameOnCardLayout.appendChild(profileImageThumbnail);
 
   const userName = document.createElement("p");
-  userName.innerText = postData.owner;
+  userName.innerText = user.name;
   userName.className = "mb-0";
   userName.id = "cardPostBody";
   userNameOnCardLayout.appendChild(userName);
@@ -132,6 +129,7 @@ const createCardAllPosts = (postData) => {
   dropDownItemDeletePost.id = "delete-post";
   dropDownItemDeletePost.href = "#";
   dropDownItemDeletePost.addEventListener("click", () => {
+    const deleteConfirmationModal = document.querySelector("#deleteConfirmationModal");
     deleteConfirmationModal.style.display = "block";
     deleteConfirmationModal.dataset.postId = postData.id;
   });
@@ -139,6 +137,7 @@ const createCardAllPosts = (postData) => {
 
   return cardColLayout;
 };
+
 
 // Targeting DOM elements
 const loaderContainer = document.querySelector(".loader-container");

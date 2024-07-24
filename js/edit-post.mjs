@@ -17,15 +17,15 @@ const editPost = async (event) => {
   event.preventDefault();
 
   // Get form input values
-  const title = event.target.querySelector("#editTitle");
-  const content = event.target.querySelector("#editBodyText");
-  const imageUrl = event.target.querySelector("#editImage");
+  const title = event.target.querySelector("#editTitle").value;
+  const content = event.target.querySelector("#editBodyText").value;
+  const imageUrl = event.target.querySelector("#editImage").value;
 
   // Create an object with edited post data
   const editPostData = {
-    title: title.value,
-    body: content.value,
-    media: imageUrl.value,
+    title: title,
+    body: content,
+    media: imageUrl,
   };
 
   try {
@@ -38,8 +38,9 @@ const editPost = async (event) => {
       },
       body: JSON.stringify(editPostData),
     });
+
     // Check if the response indicates a successful update
-    if (response) {
+    if (response.ok) {
       // Display a success message to the user
       alert("Your post is updated!");
 
@@ -57,7 +58,7 @@ const editPost = async (event) => {
 
 // Event listener for form submission
 document.addEventListener("DOMContentLoaded", () => {
-  const editPostForm = document.querySelector("#editPost");
+  const editPostForm = document.querySelector("#editPostForm");
   editPostForm.addEventListener("submit", editPost);
 });
 

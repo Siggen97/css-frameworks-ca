@@ -10,6 +10,7 @@ import { formatDateString } from "./dateFormat.mjs";
  */
 export const createCardElement = (posts) => {
   const postsContainer = document.querySelector(".all-posts_card-container");
+  postsContainer.innerHTML = "";
 
   posts.forEach((postData) => {
     const cardColLayout = document.createElement("div");

@@ -26,27 +26,24 @@ const fetchSinglePost = async (id) => {
  */
 const createCardSinglePost = (postData) => {
   const cardColLayout = document.createElement("div");
-  cardColLayout.className = "col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5";
+  cardColLayout.className = "col-12";
 
   const cardPostContent = document.createElement("div");
   cardPostContent.className = "card mb-5";
   cardColLayout.appendChild(cardPostContent);
 
-  const cardPostImage = document.createElement("img");
-  // Set the source (src) attribute of the image. Use the postData.media if it's truthy,
-  // if not, use the fallback image "../images/no_img.jpg"
-  cardPostImage.src = !!postData.media ? postData.media : "../images/no_img.jpg";
-  cardPostImage.className = "card-img-top single-post-img";
-  cardPostContent.appendChild(cardPostImage);
+  if (postData.media) {
+    const cardPostImage = document.createElement("img");
+    // Set the source (src) attribute of the image. Use the postData.media if it's truthy,
+    // if not, use the fallback image "../images/no_img.jpg"
+    cardPostImage.src = postData.media ? postData.media : "../images/no_img.jpg";
+    cardPostImage.className = "card-img-top single-post-img";
+    cardPostContent.appendChild(cardPostImage);
+  }
 
   const cardPostTextContent = document.createElement("div");
   cardPostTextContent.className = "card-body";
   cardPostContent.appendChild(cardPostTextContent);
-
-  const cardPostTitle = document.createElement("h5");
-  cardPostTitle.innerText = postData.title;
-  cardPostTitle.className = "card-title mb-2 text-to-uppercase";
-  cardPostTextContent.appendChild(cardPostTitle);
 
   const userNameOnCardLayout = document.createElement("div");
   userNameOnCardLayout.className = "d-flex flex-row align-items-center mb-1";
@@ -55,7 +52,7 @@ const createCardSinglePost = (postData) => {
   const profileImageThumbnail = document.createElement("img");
   // Set the source (src) attribute of the image. Use the postData.author.avatar if it's truthy,
   // if not, use the fallback image "../images/no_avatar.jpg"
-  profileImageThumbnail.src = !!postData.author.avatar ? postData.author.avatar : "../images/no_avatar.jpg";
+  profileImageThumbnail.src = postData.author.avatar ? postData.author.avatar : "../images/no_avatar.jpg";
   profileImageThumbnail.className = "rounded-circle me-1 profile-img-thumbnail";
   userNameOnCardLayout.appendChild(profileImageThumbnail);
 
@@ -63,6 +60,11 @@ const createCardSinglePost = (postData) => {
   userName.innerText = postData.author.name;
   userName.className = "mb-0";
   userNameOnCardLayout.appendChild(userName);
+
+  const cardPostTitle = document.createElement("h5");
+  cardPostTitle.innerText = postData.title;
+  cardPostTitle.className = "card-title mb-2 text-uppercase";
+  cardPostTextContent.appendChild(cardPostTitle);
 
   const cardPostText = document.createElement("p");
   cardPostText.innerText = postData.body;
@@ -114,5 +116,6 @@ const displaySinglePostCard = async () => {
     loaderContainer.style.display = "none";
   }
 };
+
 // Initial call to display the single post card
 displaySinglePostCard();

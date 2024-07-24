@@ -6,9 +6,7 @@
   <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="/dist/css/index.css"/>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <script src="../js/fetchProfile.mjs" type="module"></script>
-  <script src="../js/renderProfilePosts.mjs" type="module"></script>
-  <script src="../js/delete-post.mjs" type="module"></script>
+  <script src="../js/singlePost.mjs" type="module"></script>
   <script type="module">
     import { checkLoginStatus, logoutUser } from "../js/login.mjs";
 
@@ -22,7 +20,7 @@
       signOutButton.addEventListener("click", logoutUser);
     });
   </script>
-  <title>SLXEED Profile</title>
+  <title>View Post</title>
 </head>
 <body>
   <header>
@@ -38,7 +36,7 @@
               <a class="nav-link ms-3" href="../index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link ms-3 active" aria-current="page" href="/profile/">Profile</a>
+              <a class="nav-link ms-3" href="/profile/">Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link ms-3" href="/feed/">Feed</a>
@@ -49,47 +47,17 @@
       </div>
     </nav>
   </header>
-  <main class="mt-5">
-    <h1 class="visually-hidden mb-5">Profile</h1>
-    <div class="text-center mt-5 mb-2">
-      <img id="userAvatar" src="" class="profile-img rounded-circle" alt="Profile image" />
+  <main class="container mt-5">
+    <h1 class="text-center mt-5 mb-5">Post</h1>
+    <div class="row justify-content-center">
+      <div id="post-single-container" class="col-12 col-md-8"></div>
     </div>
-    <h2 id="userName" class="text-center my-1"></h2>
-    <div class="text-center my-4">
-      <button class="btn btn-primary" id="followButton">Follow</button>
-    </div>
-    <div class="text-center my-4">
-      <p>Followers: <span id="followersCount">0</span></p>
-      <p>Following: <span id="followingCount">0</span></p>
-    </div>
-
-    <h3 class="text-center my-3">My posts</h3>
-    <div class="container">
-      <div class="row user-posts_profile-page gy-4"></div>
-      <div class="loader-container" style="display:none;">Loading...</div>
-    </div>
-    <div class="modal" tabindex="-1" id="deleteConfirmationModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Confirm Delete</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Are you sure you want to delete this post?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelDelete">Cancel</button>
-            <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="loader-container" style="display:none;">Loading...</div>
   </main>
   <footer class="py-3 my-4 mt-5">
     <hr>
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="index.html" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="../index.html" class="nav-link px-2 text-muted">Home</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
     </ul>

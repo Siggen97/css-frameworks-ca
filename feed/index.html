@@ -60,7 +60,7 @@
 
     <div class="mb-4 search-post-bar">
       <div class="d-flex justify-content-between mb-3">
-        <form class="d-flex w-75">
+        <form class="d-flex w-75" id="search-form">
           <input type="search" class="form-control me-2" id="searchInput" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-primary" type="button" id="searchButton">Search</button>
         </form>
@@ -84,8 +84,13 @@
             </form>
           </div>
         </div>
+        <div class="btn-group">
+          <button class="btn btn-outline-primary" id="sortNewest">Newest</button>
+          <button class="btn btn-outline-primary" id="sortOldest">Oldest</button>
+        </div>
       </div>
     </div>
+    
 
     <div class="container mt-5 postContainer" id="postContainer">
       <div class="row all-posts_card-container"></div>
