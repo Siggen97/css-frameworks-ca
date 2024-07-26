@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "A starting point for the CSS Frameworks CA project",
   "scripts": {
-    "start": "sass --watch src/scss:dist/css & live-server",
-    "build": "sass src/scss:dist/css"
+    "build-css": "npm run build-css ",
+    "build:scss": "sass src/scss:dist/css",
+    "build:netlify": "npm run build:scss",
+    "watch": "sass --watch src/scss:dist/css",
+    "dev": "npm run watch & live-server",
+    "build": "npm run build:netlify"
   },
   "repository": {
     "type": "git",
