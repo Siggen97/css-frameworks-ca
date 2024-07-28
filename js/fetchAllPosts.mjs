@@ -11,7 +11,7 @@ const postsPerPage = 15;
  * @returns {Promise} A promise representing the asynchronous operation of fetching posts.
  */
 const fetchPosts = async (page, limit) => {
-  const url = `${apiBaseUrl}${allPostsApi}?_author=true&_sort=created&_order=desc&_page=${page}&_limit=${limit}`;
+  const url = `${apiBaseUrl}${allPostsApi}?_author=true`;
   return await fetchWithToken(url);
 };
 
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const searchButton = document.getElementById("searchButton");
   searchButton.addEventListener("click", async () => {
-    const searchInput = document.getElementById("searchInput").value;
+    const searchInput = document.getElementById("search-Input").value;
     const allPostsContainer = document.querySelector(".all-posts_card-container");
 
     if (searchInput.trim() === "") {

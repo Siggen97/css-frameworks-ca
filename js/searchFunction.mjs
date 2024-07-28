@@ -4,6 +4,7 @@ import { formatDateString } from "./dateFormat.mjs";
 import { createCardElement } from "./postCards.mjs";
 
 let posts = [];
+const API_URL = `${apiBaseUrl}${allPostsApi}?_author=true`;
 
 /**
  * Renders all the posts in the selected container.
@@ -44,18 +45,36 @@ const filterPosts = (inputText) => {
   renderPosts(filteredPosts);
 };
 
-document.getElementById("searchButton").addEventListener("click", () => {
-  const searchInput = document.getElementById("searchInput").value.trim();
-  filterPosts(searchInput);
+const searchForm = document.getElementById("search-form");
+searchForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+  // Extracts and trims the search term from the input field.
+  const searchInput = document.getElementById("search-Input");
+  const searchTerm = searchInput.value.trim();
+
+  if (searchTerm === "") {
+    // If search term is empty, render all posts
+    return renderPosts(posts);
+  }
+
+  // Call the filterPosts function with the search term
+  filterPosts(searchTerm);
 });
 
+/**
+ * Initializes the app by fetching posts and rendering them.
+ * @throws {Error} - Throws an error if there's an issue during the fetch operation.
+ */
 const initialize = async () => {
   try {
-    posts = await fetchWithToken(`${apiBaseUrl}${allPostsApi}?_author=true`);
+    // Fetch posts from the API
+    posts = await fetchWithToken(API_URL);
+    // Render the fetched posts
     renderPosts(posts);
   } catch (error) {
-    console.error("Error fetching posts:", error);
+    throw new Error("Error fetching posts:", error);
   }
 };
 
+// Call the initialize function to start the app
 initialize();
