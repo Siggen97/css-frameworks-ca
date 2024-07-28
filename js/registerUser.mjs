@@ -40,9 +40,6 @@ const registerUser = async (url, data) => {
   }
 };
 
-
-
-
 /**
  * Function to handle the form submission event and register a new user.
  * @param {Event} event The form submission event
@@ -56,7 +53,10 @@ const registerForm = document.querySelector("#registerForm");
 if (registerForm) {
   registerForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const [name, email, password, avatar] = event.target.elements;
+    const name = document.getElementById("inputName");
+    const email = document.getElementById("inputEmailRegister");
+    const password = document.getElementById("inputPasswordRegister");
+    const avatar = document.getElementById("inputAvatar");
 
     const user = {
       name: name.value,
