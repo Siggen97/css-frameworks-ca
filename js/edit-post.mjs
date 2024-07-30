@@ -10,7 +10,6 @@ const postId = params.get("id");
  * Handles the form submission to edit a post.
  * @param {Event} event - The form submission event.
  * @returns {Promise<void>} - A promise that resolves when the post editing is complete.
- * @throws {Error} - Throws an error if there's an issue with the editing process.
  */
 const editPost = async (event) => {
   // Prevent the form from submitting normally
@@ -30,7 +29,7 @@ const editPost = async (event) => {
 
   try {
     // Send a PUT request to update the post
-    const response = await fetchWithToken(`${apiBaseUrl}${allPostsApi}/${postId}`, {
+    await fetchWithToken(`${apiBaseUrl}${allPostsApi}/${postId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -39,20 +38,11 @@ const editPost = async (event) => {
       body: JSON.stringify(editPostData),
     });
 
-    // Check if the response indicates a successful update
-    if (response.ok) {
-      // Display a success message to the user
-      alert("Your post is updated!");
-
-      // Redirect to the user's profile page after successful update
-      window.location.href = "/profile/";
-    } else {
-      // Display an error message if the update was not successful
-      alert("Failed to update the post. Please try again.");
-    }
+    // Redirect to the user's profile page after update attempt
+    window.location.href = "/profile/";
   } catch (error) {
-    // Throw an error with a detailed message if an error occurs during the update
-    throw new Error("Error updating post:", error);
+    // Redirect to the user's profile page even if there's an error
+    window.location.href = "/profile/";
   }
 };
 

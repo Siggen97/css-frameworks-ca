@@ -1,29 +1,40 @@
 import { apiBaseUrl, allPostsApi } from "./variables.mjs";
-import { fetchWithToken } from "./token.mjs";
+import { fetchWithToken, token } from "./token.mjs";
 
-const deletePost = async (id) => {
+/**
+ * Deletes a post by ID.
+ * @param {string} postId - The ID of the post to delete.
+ */
+const deletePost = async (postId) => {
   try {
-    const response = await fetchWithToken(`${apiBaseUrl}${allPostsApi}/${id}`, {
+    await fetchWithToken(`${apiBaseUrl}${allPostsApi}/${postId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
-    if (response.ok) {
-      alert("Post is deleted!");
-      window.location.href = "/profile/";
-    } else {
-      throw new Error("Error deleting post:", response.statusText);
-    }
+    alert("Post is deleted!");
+    window.location.href = "/profile/";
   } catch (error) {
     console.error("Error deleting post:", error);
+    window.location.href = "/profile/";
   }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  const deleteButtons = document.querySelectorAll(".delete-btn");
   const cancelDeleteButton = document.querySelector("#cancelDelete");
   const confirmDeleteButton = document.querySelector("#confirmDelete");
   const deleteConfirmationModal = document.querySelector("#deleteConfirmationModal");
+
+  deleteButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+      const postId = event.target.getAttribute("data-post-id");
+      deleteConfirmationModal.setAttribute("data-post-id", postId);
+      deleteConfirmationModal.style.display = "block";
+    });
+  });
 
   cancelDeleteButton.addEventListener("click", () => {
     deleteConfirmationModal.style.display = "none";

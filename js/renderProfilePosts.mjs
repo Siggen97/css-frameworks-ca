@@ -124,20 +124,15 @@ const createCardAllPosts = (postData) => {
   dropDownMenu.appendChild(dropDownItemEditPost);
 
   const dropDownItemDeletePost = document.createElement("a");
-  dropDownItemDeletePost.className = "dropdown-item";
+  dropDownItemDeletePost.className = "dropdown-item delete-post";
   dropDownItemDeletePost.innerText = "Delete post";
-  dropDownItemDeletePost.id = "delete-post";
+  dropDownItemDeletePost.dataset.postId = postData.id;
   dropDownItemDeletePost.href = "#";
-  dropDownItemDeletePost.addEventListener("click", () => {
-    const deleteConfirmationModal = document.querySelector("#deleteConfirmationModal");
-    deleteConfirmationModal.style.display = "block";
-    deleteConfirmationModal.dataset.postId = postData.id;
-  });
+
   dropDownMenu.appendChild(dropDownItemDeletePost);
 
   return cardColLayout;
 };
-
 
 // Targeting DOM elements
 const loaderContainer = document.querySelector(".loader-container");
@@ -181,6 +176,9 @@ const displayAllPostsCards = async () => {
       // Append the generated card to the container for all posts
       userPostsContainer.appendChild(postCard);
     });
+
+    // Attach event listeners for delete buttons after posts are rendered
+    attachDeleteEventListeners();
   } catch (error) {
     // Display error message
     userPostsContainer.innerHTML = errorMessage;
@@ -193,5 +191,20 @@ const displayAllPostsCards = async () => {
   }
 };
 
+// Attach event listeners to delete buttons
+const attachDeleteEventListeners = () => {
+  const deleteButtons = document.querySelectorAll(".delete-post");
+  deleteButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const postId = event.target.dataset.postId;
+      const deleteConfirmationModal = document.querySelector("#deleteConfirmationModal");
+      deleteConfirmationModal.setAttribute("data-post-id", postId);
+      const modalInstance = new bootstrap.Modal(deleteConfirmationModal);
+      modalInstance.show();
+    });
+  });
+};
+
 // Initial call to display blog cards
-displayAllPostsCards();
+document.addEventListener("DOMContentLoaded", displayAllPostsCards);
