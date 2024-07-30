@@ -12,6 +12,11 @@ export const createCardElement = (posts) => {
   const postsContainer = document.querySelector(".all-posts_card-container");
   postsContainer.innerHTML = "";
 
+  if (!Array.isArray(posts)) {
+    console.error("Expected an array of posts but received:", posts);
+    return;
+  }
+
   posts.forEach((postData) => {
     const cardColLayout = document.createElement("div");
     cardColLayout.className = "col-12 mb-3";
